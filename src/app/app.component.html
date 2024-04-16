@@ -1,1 +1,30 @@
-<router-outlet></router-outlet>
+ <mat-toolbar class="navbar">
+  <div class="left-side">
+      <img src="../../../assets/img/elkem-logo.png" alt="Logo" class="logo"/>
+    <!-- <span class="logo-text">SenseLive - TMS</span> -->
+  </div>
+
+  <!-- <div class="menu-icon" (click)="dashService.toggleMenu()">
+  	<button mat-mini-fab color="basic" aria-label="menu">
+    	<mat-icon>menu</mat-icon>
+	</button>
+  </div>
+
+  <div class="right-side" [class.show-menu]="dashService.showMenu">
+    <button mat-mini-fab color="basic" aria-label="home" (click)="home()">
+      <mat-icon>home</mat-icon>
+    </button>
+
+    <button mat-mini-fab color="basic" aria-label="data_usage" (click)="data()">
+      <mat-icon>analytics</mat-icon>
+    </button>
+  </div> -->
+</mat-toolbar>
+
+<app-table></app-table>
+
+<mat-toolbar class="footer">
+	<h6 class="footer-title">powered by &copy;
+		<a href="https://www.senselive.in" class="footer-link" target="_blank">Senselive technologies</a>
+	</h6>
+</mat-toolbar>

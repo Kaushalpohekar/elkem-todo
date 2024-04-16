@@ -1,126 +1,153 @@
 <!-- <h1  class="heading fw-bold text-center">CONTROL PLAN SCHEDULE -CRITICAL PROCESS SAFTEY AUDIT & INSPECTION </h1>
  -->
 
-<div class="container-fluid">
-    <div class="row pt-2 mb-2">
+<div class="container-fluid content">
+    <div class="row pt-4 mb-3">
         <div class="col-12">
-            <div class="text-center">CONTROL PLAN SCHEDULE -CRITICAL PROCESS SAFTEY AUDIT & INSPECTION </div>
-            <div class="row">
-                <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
-                    <mat-card>
-                        <mat-card-content>
-                            <div>Total To Do</div>
-                        </mat-card-content>
-                    </mat-card>
+            <div class="row pt-4 mb-2">
+                <div class="col-12 mb-2">
+                    <div class="text-center title">CONTROL PLAN SCHEDULE -CRITICAL PROCESS SAFTEY AUDIT & INSPECTION </div>
                 </div>
+            </div>
+            <div class="row pt2 mb-2">
                 <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
-                    <mat-card>
+                    <mat-card class="to-do">
                         <mat-card-content>
                             <div class="row">
-                                <div class="col-6">
-                                    <div>Not Statred</div>
-                                </div>
-                                <div class="col-6">
-                                    <mat-icon class="icon">home</mat-icon>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card-title"><mat-icon>list</mat-icon>Total To do <span class="number">1</span></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            
                         </mat-card-content>
                     </mat-card>
                 </div>
                 <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
-                    <mat-card>
+                    <mat-card class="over-due">
                         <mat-card-content>
-                            <div>In Progress</div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card-title"><mat-icon>warning</mat-icon>Over Due <span class="number">1</span></div>
+                                </div>
+                            </div>                            
                         </mat-card-content>
                     </mat-card>
                 </div>
                 <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
-                    <mat-card>
+                    <mat-card class="in-progress">
                         <mat-card-content>
-                            <div>Completed</div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card-title"><mat-icon>timelapse</mat-icon>In Progress<span class="number">1</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
+                    <mat-card class="completed">
+                        <mat-card-content>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card-title"><mat-icon>check_circle</mat-icon>Completed<span class="number">1</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </mat-card-content>
                     </mat-card>
                 </div>
             </div>
         </div>
         <div class="col-12">
-            <mat-card>
-                <mat-card-content>
-                    <table mat-table [dataSource]="dataSource">
-                        <ng-container matColumnDef="position">
-                          <th mat-header-cell *matHeaderCellDef> Sr. No </th>
-                          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-                        </ng-container>
-                    
-                        <ng-container matColumnDef="name">
-                          <th mat-header-cell *matHeaderCellDef> SCHEDULE / EQUIPMENT </th>
-                          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                        </ng-container>
-                      
-                        <ng-container matColumnDef="frequency">
-                          <th mat-header-cell *matHeaderCellDef> Frequency </th>
-                          <td mat-cell *matCellDef="let element"> {{element.frequency}} </td>
-                        </ng-container>
-                      
-                        <ng-container matColumnDef="symbol">
-                          <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-                        </ng-container>
-                      
-                        <ng-container matColumnDef="Jan">
-                            <th mat-header-cell *matHeaderCellDef> Jan </th>
-                            <td mat-cell *matCellDef="let element"> {{element.Jan}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Feb">
-                            <th mat-header-cell *matHeaderCellDef> Feb </th>
-                            <td mat-cell *matCellDef="let element"> {{element.column5}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Mar">
-                            <th mat-header-cell *matHeaderCellDef> Mar </th>
-                            <td mat-cell *matCellDef="let element"> {{element.column5}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Apr">
-                            <th mat-header-cell *matHeaderCellDef> Apr </th>
-                            <td mat-cell *matCellDef="let element"> {{element.column5}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="May">
-                            <th mat-header-cell *matHeaderCellDef> May </th>
-                            <td mat-cell *matCellDef="let element"> {{element.column5}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Jun">
-                            <th mat-header-cell *matHeaderCellDef> Jun </th>
-                            <td mat-cell *matCellDef="let element"> {{element.column5}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Jul">
-                            <th mat-header-cell *matHeaderCellDef> Jul </th>
-                            <td mat-cell *matCellDef="let element"> {{element.column5}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Aug">
-                            <th mat-header-cell *matHeaderCellDef> Aug </th>
-                            <td mat-cell *matCellDef="let element"> {{element.column5}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Sep">
-                            <th mat-header-cell *matHeaderCellDef> Sep </th>
-                            <td mat-cell *matCellDef="let element"> {{element.column5}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Oct">
-                            <th mat-header-cell *matHeaderCellDef> Oct </th>
-                            <td mat-cell *matCellDef="let element"> {{element.column5}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Nov">
-                            <th mat-header-cell *matHeaderCellDef> Nov </th>
-                            <td mat-cell *matCellDef="let element"> {{element.column5}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="Dec">
-                            <th mat-header-cell *matHeaderCellDef> Dec </th>
-                            <td mat-cell *matCellDef="let element"> {{element.column5}} </td>
-                        </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                </mat-card-content>
-            </mat-card>
+            <div class="table-container" style="overflow: auto; max-height:100%; ">
+                <table #myTable mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef> Sr. No </th>
+                      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef> SCHEDULE / EQUIPMENT </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="responsible">
+                      <th mat-header-cell *matHeaderCellDef> Responsible </th>
+                      <td mat-cell *matCellDef="let element"> {{element.responsible}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="frequency">
+                      <th mat-header-cell *matHeaderCellDef> Frequency </th>
+                      <td mat-cell *matCellDef="let element"> {{element.frequency}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="symbol">
+                      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="Jan">
+                        <th mat-header-cell *matHeaderCellDef> Jan </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Jan)"> {{element.Jan}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Feb">
+                        <th mat-header-cell *matHeaderCellDef> Feb </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Feb)"> {{element.Feb}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Mar">
+                        <th mat-header-cell *matHeaderCellDef> Mar </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Feb)"[ngStyle]="getCellStyle(element.Mar)"> {{element.Mar}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Apr">
+                        <th mat-header-cell *matHeaderCellDef> Apr </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Apr)"> {{element.Apr}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="May">
+                        <th mat-header-cell *matHeaderCellDef> May </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.May)"> {{element.May}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Jun">
+                        <th mat-header-cell *matHeaderCellDef> Jun </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Jun)"> {{element.Jun}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Jul">
+                        <th mat-header-cell *matHeaderCellDef> Jul </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Jul)"> {{element.Jul}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Aug">
+                        <th mat-header-cell *matHeaderCellDef> Aug </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Aug)"> {{element.Aug}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Sep">
+                        <th mat-header-cell *matHeaderCellDef> Sep </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Sep)"> {{element.Sep}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Oct">
+                        <th mat-header-cell *matHeaderCellDef> Oct </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Oct)"> {{element.Oct}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Nov">
+                        <th mat-header-cell *matHeaderCellDef> Nov </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Nov)"> {{element.Nov}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Dec">
+                        <th mat-header-cell *matHeaderCellDef> Dec </th>
+                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Dec)"> {{element.Dec}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>

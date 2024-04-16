@@ -8,4 +8,7 @@ import {MatTableModule} from '@angular/material/table';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  home(){
+
+  }
 }

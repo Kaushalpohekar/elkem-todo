@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { scheduled } from 'rxjs';
 
 
 
 export interface PeriodicElement {
   name: string;
-  position: number;
+  responsible: string;
+  position: string;
   frequency: string;
-  symbol: string;
   Jan: string;
   Feb: string;
   Mar: string;
@@ -23,14 +23,14 @@ export interface PeriodicElement {
   // height: number;
 }
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', frequency:'Half_Yearly' , symbol: 'H', Jan:'', Feb:'',Mar:'', Apr:'', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'', Nov:'', Dec:''},
-  {position: 2, name: 'Helium', frequency:'Half Yearly' , symbol: 'He', Jan:'', Feb:'',Mar:'', Apr:'', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'', Nov:'', Dec:''},
-  {position: 3, name: 'Lithium', frequency:'Half Yearly', symbol: 'Li', Jan:'', Feb:'',Mar:'', Apr:'', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'', Nov:'', Dec:''},
-  {position: 4, name: 'Beryllium', frequency:'Half Yearly', symbol: 'Be', Jan:'', Feb:'',Mar:'', Apr:'', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'', Nov:'', Dec:''},
-  {position: 5, name: 'Boron', frequency:'Half Yearly', symbol: 'B', Jan:'', Feb:'',Mar:'', Apr:'', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'', Nov:'', Dec:''},
-  {position: 6, name: 'Carbon', frequency:'Half Yearly' , symbol: 'C', Jan:'', Feb:'',Mar:'', Apr:'', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'', Nov:'', Dec:''},
-  {position: 7, name: 'Nitrogen', frequency: 'Quaterly' , symbol: 'N', Jan:'', Feb:'',Mar:'', Apr:'', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'', Nov:'', Dec:''},
-  {position: 8, name: 'Oxygen', frequency: 'Half Yearly' , symbol: 'O', Jan:'', Feb:'',Mar:'', Apr:'', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'', Nov:'', Dec:''},];
+  {position: '1', name: 'Induction Furnace Health CheckUp', responsible:'M. Lapkale', frequency:'Half Yearly' , Jan:'', Feb:'4',Mar:'', Apr:'', May:'', Jun:'', Jul:'', Aug:'3', Sep:'', Oct:'', Nov:'', Dec:''},
+  {position: '2', name: 'Confined Space Inspecioon', responsible:'Prashant', frequency:'Half Yearly' ,  Jan:'', Feb:'',Mar:'', Apr:'3', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'3', Nov:'', Dec:''},
+  {position: '3', name: 'Furnace Water Tank', responsible:'kaushal', frequency:'Half Yearly',  Jan:'', Feb:'',Mar:'', Apr:'3', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'3', Nov:'', Dec:''},
+  {position: 'b', name: 'Admin Water Tank', responsible:'kaushal', frequency:'Half Yearly',  Jan:'', Feb:'',Mar:'', Apr:'3', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'3', Nov:'', Dec:''},
+  {position: 'c', name: 'Operator Utility over Head Tank', responsible:'Prashant', frequency:'Half Yearly',  Jan:'', Feb:'',Mar:'', Apr:'3', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'3', Nov:'', Dec:''},
+  {position: 'd', name: 'Fire Tank R&D Furnace Tanks', responsible:'Prashant', frequency:'Half Yearly' ,  Jan:'', Feb:'',Mar:'', Apr:'3', May:'', Jun:'', Jul:'3', Aug:'', Sep:'', Oct:'3', Nov:'', Dec:''},
+  {position: '4', name: 'Electrical System Audit CSP 1/2/3/4/5', responsible:'Pradip Nikam', frequency: 'Quaterly' ,  Jan:'4', Feb:'',Mar:'', Apr:'3', May:'', Jun:'', Jul:'', Aug:'', Sep:'', Oct:'3', Nov:'', Dec:''},
+  {position: '5', name: 'Earthing System Audit', responsible:'M. Lapkale' ,frequency: 'Half Yearly' ,  Jan:'', Feb:'4',Mar:'', Apr:'', May:'', Jun:'', Jul:'', Aug:'3', Sep:'', Oct:'', Nov:'', Dec:''},];
 
 @Component({
   selector: 'app-table',
@@ -38,7 +38,23 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./table.component.css']
 })
 export class TableComponent  {
-  displayedColumns: string[] = ['position', 'name', 'frequency', 'symbol', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  @ViewChild('myTable') myTable!: ElementRef;
+
+  displayedColumns: string[] = ['position', 'name', 'responsible', 'frequency', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   dataSource = ELEMENT_DATA;
+
+  getCellStyle(value: any): object {
+      let style = {};
+      if (value === '4') {
+          style = { 'background-color': '#26ab49' }; // Change color for value 4
+      } else if (value === '3') {
+          style = { 'background-color': '#7682db' }; // Change color for value 3
+      } else if (value === '2') {
+          style = { 'background-color': '#ed7777' }; // Change color for values 1 and 2
+      } else if (value === '1') {
+          style = { 'background-color': '#babfbb' }; // Change color for values 1 and 2
+      }
+      return style;
+  }
 
 }
