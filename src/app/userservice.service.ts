@@ -13,12 +13,12 @@ export class UserserviceService {
   private readonly API_URL = 'http://localhost:3000';
 
   getALlUserdata(): Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/AllSchedule`);
+    return this.http.get<any>(`${this.API_URL}/AllSchedule`);
   }
   
 
   getALltask(): Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/countTasks`);
+    return this.http.get<any>(`${this.API_URL}/countTasks`);
   }
 }
 
