@@ -11,6 +11,7 @@ import {MatTableModule} from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -28,7 +29,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
-    HttpClientModule
+    MatPaginatorModule,
+    HttpClientModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
