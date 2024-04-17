@@ -16,6 +16,16 @@
   font-weight: 550;
 }
 
+.example-container {
+  height: 500px;
+  overflow: auto;
+}
+.example-container2{
+  height: 470px;
+  overflow: auto;
+}
+
+
 
 .number {
     margin-left: auto;
@@ -66,6 +76,12 @@ table {
 
   tr:last-child td {
     border-bottom: 1px solid #dddddd;
+}
+th{
+  justify-content: center;
+}
+td{
+  justify-content: center;
 }
 
 
