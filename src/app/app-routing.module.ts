@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TableComponent } from './table/table.component';
+import { TimeBasedComponent } from './time-based/time-based.component';
 
 const routes: Routes = [
   
   {path: 'table', component: TableComponent},
-  {path: '**', redirectTo: 'home', pathMatch: 'full' },
+  {path: 'time', component: TimeBasedComponent},
+  {path: '**', redirectTo: 'table', pathMatch: 'full' },
 ];
 
 

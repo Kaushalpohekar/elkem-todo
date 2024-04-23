@@ -1,0 +1,40 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 500px;
+}
+
+
+.header{
+    background: linear-gradient(45deg, rgb(247, 247, 135),#ff0600);
+    height: 50px;
+    font-size: 25px;
+    color: black;
+    font-weight: 550;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-width{
+    width: 100%;
+}
+
+
+.custom-file-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    color: #000;
+    border: 1px solid #3F51B5;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.custom-file-input:hover {
+    background-color: #3F51B5;
+    border-color: #3F51B5;
+}

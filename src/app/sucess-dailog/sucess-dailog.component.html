@@ -1,0 +1,14 @@
+<div class="success-message">
+  <div class="success-icon">
+    <svg viewBox="0 0 24 24">
+      <path d="M20.5 5.9L9 17.4l-5.5-5.5" />
+    </svg>
+  </div>
+  <p>Successfully Done</p>
+  <div *ngIf="task">
+    <p>
+      The task <span class="bold-title">{{ task.name }}</span> for the month of <span class="bold-title">{{ month }}</span> has been successfully completed.
+      It was completed by <span class="bold-title">{{ task.Responsibility }}</span>.
+    </p>
+  </div>
+</div>

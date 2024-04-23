@@ -2,13 +2,16 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserserviceService } from '../userservice.service';
 import { MatTableDataSource } from '@angular/material/table'; // Import MatTableDataSource
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SucessDailogComponent } from '../sucess-dailog/sucess-dailog.component';
+import { CompleteApprovalComponent } from '../complete-approval/complete-approval.component';
 
 export interface PeriodicElement {
   Sr_No: any;
   Schedule_Equipment: any;
-  Subtask: any;
-  admin_email: any;
+  Responsibility: any;
   Frequency: any;
+  Owner: any;
   Jan: any;
   Feb: any;
   Mar: any;
@@ -21,6 +24,7 @@ export interface PeriodicElement {
   Oct: any;
   Nov: any;
   Dec: any;
+  Comments: any;
 }
 
 @Component({
@@ -30,6 +34,8 @@ export interface PeriodicElement {
 })
 export class TableComponent implements OnInit {
 
+  constructor(public dialog: MatDialog,public service: UserserviceService) {}
+
   totalTasks: number = 0;
   overdueTasks: number = 0;
   inProgressTasks: number = 0;
@@ -38,11 +44,11 @@ export class TableComponent implements OnInit {
   @ViewChild('myTable') myTable!: ElementRef;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
-  displayedColumns: string[] = ['position', 'name', 'admin_email', 'responsible', 'frequency', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+  displayedColumns: string[] = ['position', 'name', 'Responsibility','frequency', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', 'Comments'];
 
   dataSource = new MatTableDataSource<PeriodicElement>(); // Define MatTableDataSource
 
-  constructor(public service: UserserviceService) {}
+  
 
   ngOnInit(): void {
     this.getuserdata();
@@ -57,9 +63,9 @@ export class TableComponent implements OnInit {
         this.dataSource.data = data.devices.map((item: any, index: number) => ({
           position: counter++,
           name: item.Schedule_Equipment,
-          responsible: item.Subtask || '',
-          frequency: item.Frequency.toLowerCase(),
-          admin_email: item.admin_email,
+          Owner: item.admin_name || '',
+          frequency: item.Frequency,
+          Responsibility: item.Responsibility,
           january: item.Jan,
           february: item.Feb,
           march: item.Mar,
@@ -71,11 +77,12 @@ export class TableComponent implements OnInit {
           september: item.Sep,
           october: item.Oct,
           november: item.Nov,
-          december: item.December
+          december: item.December,
+          Comments: item.Comments
         }));
-        if (this.paginator) {
-          this.dataSource.paginator = this.paginator; // Assign the paginator
-        }
+        // if (this.paginator) {
+        //   this.dataSource.paginator = this.paginator; // Assign the paginator
+        // }
       },
       (error: any) => {
         console.error('Error fetching user data:', error);
@@ -96,28 +103,6 @@ export class TableComponent implements OnInit {
         console.error('Error fetching data:', error);
       }
     );
-  }
-
-  getCellStyle(value: any): object {
-    let style = {};
-    switch (value) {
-      case '4':
-        style = { 'background-color': '#54A954' }; // Completed
-        break;
-      case '3':
-        style = { 'background-color': '#7982E0' }; // Pending
-        break;
-      case '2':
-        style = { 'background-color': '#DE7D70' }; // Not submitted
-        break;
-      case '1':
-        style = { 'background-color': '#FFD700' }; // Yellow (Custom color for value 1)
-        break;
-      default:
-        style = { 'background-color': 'white' }; // Default color
-        break;
-    }
-    return style;
   }
 
   getTaskStatus(element: any, month: string) {
@@ -144,5 +129,22 @@ export class TableComponent implements OnInit {
       width: '30px',
       height: '20px'
     };
+  }
+
+  complete(task: any, month: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { task, month };
+    const dialogRef = this.dialog.open(CompleteApprovalComponent, dialogConfig);
+}
+
+
+  completedSucess(task: any, month: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { task, month };
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(SucessDailogComponent, dialogConfig);
+    setTimeout(() => {
+      dialogRef.close();
+    }, 2000);
   }
 }

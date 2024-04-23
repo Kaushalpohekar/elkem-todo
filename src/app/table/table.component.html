@@ -1,6 +1,3 @@
-<!-- <h1  class="heading fw-bold text-center">CONTROL PLAN SCHEDULE -CRITICAL PROCESS SAFTEY AUDIT & INSPECTION </h1>
- -->
-
 <div class="container-fluid content">
     <div class="row pt-4 mb-3">
         <div class="col-12">
@@ -68,27 +65,25 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 mb-2">
             <div class="example-container" style="overflow: auto; max-height:100%; ">
                 <table #myTable mat-table [dataSource]="dataSource">
+
                     <ng-container matColumnDef="position">
                       <th mat-header-cell *matHeaderCellDef> Sr. No </th>
                       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
                     </ng-container>
                 
                     <ng-container matColumnDef="name">
-                      <th mat-header-cell *matHeaderCellDef> SCHEDULE / EQUIPMENT </th>
+                      <th mat-header-cell *matHeaderCellDef> Schedule / Equipment </th>
                       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="admin_email">
-                      <th mat-header-cell *matHeaderCellDef> responsible </th>
-                      <td mat-cell *matCellDef="let element"> {{element.admin_email}} </td>
+                    <ng-container matColumnDef="Responsibility">
+                      <th mat-header-cell *matHeaderCellDef> Responsibility </th>
+                      <td mat-cell *matCellDef="let element"> {{element.Responsibility}} </td>
                     </ng-container>
-                    <ng-container matColumnDef="responsible">
-                        <th mat-header-cell *matHeaderCellDef> task</th>
-                        <td mat-cell *matCellDef="let element"> {{element.responsible}} </td>
-                      </ng-container>
+
                     <ng-container matColumnDef="frequency">
                       <th mat-header-cell *matHeaderCellDef> Frequency </th>
                       <td mat-cell *matCellDef="let element"> {{element.frequency}} </td>
@@ -98,78 +93,30 @@
                       <th mat-header-cell *matHeaderCellDef> Symbol </th>
                       <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
                     </ng-container>
-                  
-                    <!-- <ng-container matColumnDef="Jan">
-                        <th mat-header-cell *matHeaderCellDef> Jan </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Jan)"> {{element.Jan}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Feb">
-                        <th mat-header-cell *matHeaderCellDef> Feb </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Feb)"> {{element.Feb}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Mar">
-                        <th mat-header-cell *matHeaderCellDef> Mar </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Feb)"[ngStyle]="getCellStyle(element.Mar)"> {{element.Mar}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Apr">
-                        <th mat-header-cell *matHeaderCellDef> Apr </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Apr)"> {{element.Apr}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="May">
-                        <th mat-header-cell *matHeaderCellDef> May </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.May)"> {{element.May}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Jun">
-                        <th mat-header-cell *matHeaderCellDef> Jun </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Jun)"> {{element.Jun}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Jul">
-                        <th mat-header-cell *matHeaderCellDef> Jul </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Jul)"> {{element.Jul}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Aug">
-                        <th mat-header-cell *matHeaderCellDef> Aug </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Aug)"> {{element.Aug}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Sep">
-                        <th mat-header-cell *matHeaderCellDef> Sep </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Sep)"> {{element.Sep}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Oct">
-                        <th mat-header-cell *matHeaderCellDef> Oct </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Oct)"> {{element.Oct}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Nov">
-                        <th mat-header-cell *matHeaderCellDef> Nov </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Nov)"> {{element.Nov}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Dec">
-                        <th mat-header-cell *matHeaderCellDef> Dec </th>
-                        <td mat-cell *matCellDef="let element" [ngStyle]="getCellStyle(element.Dec)"> {{element.Dec}} </td>
-                    </ng-container> -->
-                    <ng-container matColumnDef="january">
-                        <th mat-header-cell *matHeaderCellDef>JAN</th>
+
+                    <!-- <ng-container matColumnDef="january">
+                        <th mat-header-cell *matHeaderCellDef>Jan</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'january')"></div>
                         </td>
                     </ng-container>
                     
                     <ng-container matColumnDef="february">
-                        <th mat-header-cell *matHeaderCellDef>FEB</th>
+                        <th mat-header-cell *matHeaderCellDef>Feb</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'february')"></div>
                         </td>
                     </ng-container>
                     
                     <ng-container matColumnDef="march">
-                        <th mat-header-cell *matHeaderCellDef>MAR</th>
+                        <th mat-header-cell *matHeaderCellDef>Mar</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'march')"></div>
                         </td>
                     </ng-container>
                     
                     <ng-container matColumnDef="april">
-                        <th mat-header-cell *matHeaderCellDef>APR</th>
+                        <th mat-header-cell *matHeaderCellDef>Apr</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'april')"></div>
                         </td>
@@ -177,67 +124,276 @@
 
 
                     <ng-container matColumnDef="may">
-                        <th mat-header-cell *matHeaderCellDef>MAY</th>
+                        <th mat-header-cell *matHeaderCellDef>May</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'may')"></div>
                         </td>
                     </ng-container>
                     
                     <ng-container matColumnDef="june">
-                        <th mat-header-cell *matHeaderCellDef>JUNE</th>
+                        <th mat-header-cell *matHeaderCellDef>June</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'june')"></div>
                         </td>
                     </ng-container>
                     
                     <ng-container matColumnDef="july">
-                        <th mat-header-cell *matHeaderCellDef>JULY</th>
+                        <th mat-header-cell *matHeaderCellDef>July</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'july')"></div>
                         </td>
                     </ng-container>
                     
                     <ng-container matColumnDef="august">
-                        <th mat-header-cell *matHeaderCellDef>AUG</th>
+                        <th mat-header-cell *matHeaderCellDef>Aug</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'august')"></div>
                         </td>
                     </ng-container>
                     
                     <ng-container matColumnDef="september">
-                        <th mat-header-cell *matHeaderCellDef>SEP</th>
+                        <th mat-header-cell *matHeaderCellDef>Sep</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'september')"></div>
                         </td>
                     </ng-container>
                     
                     <ng-container matColumnDef="october">
-                        <th mat-header-cell *matHeaderCellDef>OCT</th>
+                        <th mat-header-cell *matHeaderCellDef>Oct</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'october')"></div>
                         </td>
                     </ng-container>
                     
                     <ng-container matColumnDef="november">
-                        <th mat-header-cell *matHeaderCellDef>NOV</th>
+                        <th mat-header-cell *matHeaderCellDef>Nov</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'november')"></div>
                         </td>
                     </ng-container>
                     
                     <ng-container matColumnDef="december">
-                        <th mat-header-cell *matHeaderCellDef>DEC</th>
+                        <th mat-header-cell *matHeaderCellDef>Dec</th>
                         <td mat-cell *matCellDef="let element">
                             <div [ngStyle]="getTaskStatus(element, 'december')"></div>
                         </td>
+                    </ng-container>-->
+                    <ng-container matColumnDef="january">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Jan
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.january === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'january')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.january === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'january')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.january === 3">
+                                <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                            </ng-container>
+                        </td>
+
+                    </ng-container>
+
+                    <ng-container matColumnDef="february">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Feb
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.february === 1">
+                            <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'february')"></button>
+                        </ng-container>
+                        <ng-container *ngIf="element.february === 2">
+                            <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'february')"></button>
+                        </ng-container>
+                        <ng-container *ngIf="element.february === 3">
+                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="march">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Mar
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.march === 1">
+                            <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'march')"></button>
+                        </ng-container>
+                        <ng-container *ngIf="element.march === 2">
+                            <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'march')"></button>
+                        </ng-container>
+                        <ng-container *ngIf="element.march === 3">
+                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="april">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Apr
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.april === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'april')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.april === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'april')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.april === 3">
+                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="may">
+                        <th mat-header-cell *matHeaderCellDef>
+                            May
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.may === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'may')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.may === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'may')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.may === 3">
+                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="june">
+                        <th mat-header-cell *matHeaderCellDef>
+                            June
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.june === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'june')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.june === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'june')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.june === 3">
+                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="july">
+                        <th mat-header-cell *matHeaderCellDef>
+                            July
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.july === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'july')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.july === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'july')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.july === 3">
+                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="august">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Aug
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.august === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'august')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.august === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'august')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.august === 3">
+                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="september">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Sept
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.september === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'september')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.september === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'september')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.september === 3">
+                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="october">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Oct
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.october === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'october')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.october === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'october')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.october === 3">
+                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="november">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Nov
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.november === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'november')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.november === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'november')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.november === 3">
+                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="december">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Dec
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container *ngIf="element.december === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'december')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.december === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'december')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.december === 3">
+                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="Comments">
+                      <th mat-header-cell *matHeaderCellDef> Feedback </th>
+                      <td mat-cell *matCellDef="let element"> {{element.Comments}} </td>
                     </ng-container>
                     
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" style="z-index: 1;"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
                 </table>
             </div>
-            <mat-paginator [length]="200" [pageSizeOptions]="[10]" aria-label="Select page">
-            </mat-paginator>
+            <!-- <mat-paginator [length]="200" [pageSizeOptions]="[7]" aria-label="Select page">
+            </mat-paginator> -->
             
         </div>
     </div>

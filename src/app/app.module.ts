@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { TableComponent } from './table/table.component';
 import { MatInputModule } from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
@@ -13,11 +12,27 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TimeBasedComponent } from './time-based/time-based.component';
+import { TableComponent } from './table/table.component';
+import { SucessDailogComponent } from './sucess-dailog/sucess-dailog.component';
+import { CompleteApprovalComponent } from './complete-approval/complete-approval.component';
+
+import { PathLocationStrategy ,LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent
+    TableComponent,
+    TimeBasedComponent,
+    SucessDailogComponent,
+    CompleteApprovalComponent
   ],
   imports: [
     BrowserModule,
@@ -31,9 +46,15 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     MatPaginatorModule,
     HttpClientModule,
-   
+    MatExpansionModule,
+    MatListModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{provide : LocationStrategy , useClass : PathLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

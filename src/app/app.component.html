@@ -1,27 +1,27 @@
  <mat-toolbar class="navbar">
   <div class="left-side">
-      <img src="../../../assets/img/elkem-logo.png" alt="Logo" class="logo"/>
+      <img src="../../../assets/img/elkem-logo-red.svg" alt="Logo" class="logo"/>
     <!-- <span class="logo-text">SenseLive - TMS</span> -->
   </div>
 
-  <!-- <div class="menu-icon" (click)="dashService.toggleMenu()">
+<!--   <div class="menu-icon" (click)="dashService.toggleMenu()">
   	<button mat-mini-fab color="basic" aria-label="menu">
     	<mat-icon>menu</mat-icon>
 	</button>
   </div>
-
-  <div class="right-side" [class.show-menu]="dashService.showMenu">
-    <button mat-mini-fab color="basic" aria-label="home" (click)="home()">
-      <mat-icon>home</mat-icon>
+ -->
+  <div class="right-side">
+    <button mat-mini-fab color="basic" (click)="CriticalProcess()">
+      <mat-icon>list</mat-icon>
     </button>
 
-    <button mat-mini-fab color="basic" aria-label="data_usage" (click)="data()">
-      <mat-icon>analytics</mat-icon>
+    <button mat-mini-fab color="basic" (click)="TimeBased()" >
+      <mat-icon>table_chart</mat-icon>
     </button>
-  </div> -->
+  </div>
 </mat-toolbar>
 
-<app-table></app-table>
+<router-outlet></router-outlet>
 
 <mat-toolbar class="footer">
 	<h6 class="footer-title">powered by &copy;

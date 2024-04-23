@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import * as Highcharts from "highcharts/highcharts-gantt";
 import {MatTableModule} from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,13 @@ import {MatTableModule} from '@angular/material/table';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  home(){
+  constructor(private router: Router) { }
 
+  CriticalProcess(){
+    this.router.navigate(['/table']);
+  }
+
+  TimeBased() {
+    this.router.navigate(['/time']);
   }
 }
