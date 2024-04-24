@@ -1,400 +1,361 @@
-<div class="container-fluid content">
-    <div class="row pt-4 mb-3">
-        <div class="col-12">
-            <div class="row pt-4 mb-2">
-                <div class="col-12 mb-2">
-                    <div class="text-center title">CONTROL PLAN SCHEDULE -CRITICAL PROCESS SAFTEY AUDIT & INSPECTION </div>
+<div *ngIf="service.pageLoading">
+  <app-loading></app-loading>
+</div>
+<div *ngIf="!service.pageLoading">
+    <div class="container-fluid content">
+        <div class="row pt-4 mb-3">
+            <div class="col-12">
+                <div class="row pt-4 mb-2">
+                    <div class="col-12 mb-2">
+                        <div class="text-center title">Control Plan Schedule -Critical Process Saftey Audit & Inspection</div>
+                    </div>
+                </div>
+                <div class="row pt2 mb-2">
+                    <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
+                        <mat-card class="to-do">
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card-title"><mat-icon>list</mat-icon>Total To do <span class="number">{{ totalTasks }}</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
+                        <mat-card class="over-due">
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card-title"><mat-icon>warning</mat-icon>Over Due <span class="number">{{ overdueTasks }}</span></div>
+                                    </div>
+                                </div>                            
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
+                        <mat-card class="in-progress">
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card-title"><mat-icon>timelapse</mat-icon>In Progress<span class="number">{{ inProgressTasks }}</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
+                        <mat-card class="completed">
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card-title"><mat-icon>check_circle</mat-icon>Completed<span class="number">{{ completedTasks }}</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
                 </div>
             </div>
-            <div class="row pt2 mb-2">
-                <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
-                    <mat-card class="to-do">
-                        <mat-card-content>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="card-title"><mat-icon>list</mat-icon>Total To do <span class="number">{{ totalTasks }}</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-                <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
-                    <mat-card class="over-due">
-                        <mat-card-content>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card-title"><mat-icon>warning</mat-icon>Over Due <span class="number">{{ overdueTasks }}</span></div>
-                                </div>
-                            </div>                            
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-                <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
-                    <mat-card class="in-progress">
-                        <mat-card-content>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="card-title"><mat-icon>timelapse</mat-icon>In Progress<span class="number">{{ inProgressTasks }}</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-                <div class="col-lg-3 -col-md-3 col-sm-12 mb-2">
-                    <mat-card class="completed">
-                        <mat-card-content>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="card-title"><mat-icon>check_circle</mat-icon>Completed<span class="number">{{ completedTasks }}</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 mb-2">
-            <div class="example-container" style="overflow: auto; max-height:100%; ">
-                <table #myTable mat-table [dataSource]="dataSource">
+            <div class="col-12 mb-2">
+                <div class="example-container" style="overflow: auto; max-height:100%; ">
+                    <table #myTable mat-table [dataSource]="dataSource">
 
-                    <ng-container matColumnDef="position">
-                      <th mat-header-cell *matHeaderCellDef> Sr. No </th>
-                      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-                    </ng-container>
-                
-                    <ng-container matColumnDef="name">
-                      <th mat-header-cell *matHeaderCellDef> Schedule / Equipment </th>
-                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                    </ng-container>
+                        <ng-container matColumnDef="position">
+                          <th mat-header-cell *matHeaderCellDef> Sr. No </th>
+                          <td mat-cell *matCellDef="let element"> <strong>{{element.position}}</strong> </td>
+                        </ng-container>
+                    
+                        <ng-container matColumnDef="name">
+                          <th mat-header-cell *matHeaderCellDef> Schedule / Equipment </th>
+                          <td mat-cell *matCellDef="let element"> 
+                            <div class="important-task">
+                                {{element.name}}
+                            </div> 
+                          </td>
+                        </ng-container>
 
-                    <ng-container matColumnDef="Responsibility">
-                      <th mat-header-cell *matHeaderCellDef> Responsibility </th>
-                      <td mat-cell *matCellDef="let element"> {{element.Responsibility}} </td>
-                    </ng-container>
+                        <ng-container matColumnDef="Responsibility">
+                          <th mat-header-cell *matHeaderCellDef> Responsibility </th>
+                          <td mat-cell *matCellDef="let element"> {{element.Responsibility}} </td>
+                        </ng-container>
 
-                    <ng-container matColumnDef="frequency">
-                      <th mat-header-cell *matHeaderCellDef> Frequency </th>
-                      <td mat-cell *matCellDef="let element"> {{element.frequency}} </td>
-                    </ng-container>
-                  
-                    <ng-container matColumnDef="symbol">
-                      <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-                    </ng-container>
+                        <ng-container matColumnDef="frequency">
+                          <th mat-header-cell *matHeaderCellDef> Frequency </th>
+                          <td mat-cell *matCellDef="let element"> {{element.frequency}} </td>
+                        </ng-container>
+                      
+                        <ng-container matColumnDef="symbol">
+                          <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                        </ng-container>
 
-                    <!-- <ng-container matColumnDef="january">
-                        <th mat-header-cell *matHeaderCellDef>Jan</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'january')"></div>
-                        </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="february">
-                        <th mat-header-cell *matHeaderCellDef>Feb</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'february')"></div>
-                        </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="march">
-                        <th mat-header-cell *matHeaderCellDef>Mar</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'march')"></div>
-                        </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="april">
-                        <th mat-header-cell *matHeaderCellDef>Apr</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'april')"></div>
-                        </td>
-                    </ng-container>
+                        <ng-container matColumnDef="january">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Jan
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.january === 1">
+                                    <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'january')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.january === 2">
+                                    <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'january')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.january === 3">
+                                    <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.january === 4">
+                                    <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                                </ng-container>
+                            </td>
 
+                        </ng-container>
 
-                    <ng-container matColumnDef="may">
-                        <th mat-header-cell *matHeaderCellDef>May</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'may')"></div>
-                        </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="june">
-                        <th mat-header-cell *matHeaderCellDef>June</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'june')"></div>
-                        </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="july">
-                        <th mat-header-cell *matHeaderCellDef>July</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'july')"></div>
-                        </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="august">
-                        <th mat-header-cell *matHeaderCellDef>Aug</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'august')"></div>
-                        </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="september">
-                        <th mat-header-cell *matHeaderCellDef>Sep</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'september')"></div>
-                        </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="october">
-                        <th mat-header-cell *matHeaderCellDef>Oct</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'october')"></div>
-                        </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="november">
-                        <th mat-header-cell *matHeaderCellDef>Nov</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'november')"></div>
-                        </td>
-                    </ng-container>
-                    
-                    <ng-container matColumnDef="december">
-                        <th mat-header-cell *matHeaderCellDef>Dec</th>
-                        <td mat-cell *matCellDef="let element">
-                            <div [ngStyle]="getTaskStatus(element, 'december')"></div>
-                        </td>
-                    </ng-container>-->
-                    <ng-container matColumnDef="january">
-                        <th mat-header-cell *matHeaderCellDef>
-                            Jan
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.january === 1">
-                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'january')"></button>
+                        <ng-container matColumnDef="february">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Feb
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.february === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'february')"></button>
                             </ng-container>
-                            <ng-container *ngIf="element.january === 2">
-                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'january')"></button>
+                            <ng-container *ngIf="element.february === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'february')"></button>
                             </ng-container>
-                            <ng-container *ngIf="element.january === 3">
+                            <ng-container *ngIf="element.february === 3">
                                 <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
                             </ng-container>
-                        </td>
+                            <ng-container *ngIf="element.february === 4">
+                                <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                            </ng-container>
+                            </td>
+                        </ng-container>
 
-                    </ng-container>
+                        <ng-container matColumnDef="march">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Mar
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.march === 1">
+                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'march')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.march === 2">
+                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'march')"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.march === 3">
+                                <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                            </ng-container>
+                            <ng-container *ngIf="element.march === 4">
+                                <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                            </ng-container>
+                            </td>
+                        </ng-container>
 
-                    <ng-container matColumnDef="february">
-                        <th mat-header-cell *matHeaderCellDef>
-                            Feb
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.february === 1">
-                            <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'february')"></button>
+                        <ng-container matColumnDef="april">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Apr
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.april === 1">
+                                    <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'april')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.april === 2">
+                                    <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'april')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.april === 3">
+                                <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.april === 4">
+                                    <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                                </ng-container>
+                            </td>
                         </ng-container>
-                        <ng-container *ngIf="element.february === 2">
-                            <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'february')"></button>
-                        </ng-container>
-                        <ng-container *ngIf="element.february === 3">
-                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
-                        </ng-container>
-                        </td>
-                    </ng-container>
 
-                    <ng-container matColumnDef="march">
-                        <th mat-header-cell *matHeaderCellDef>
-                            Mar
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.march === 1">
-                            <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'march')"></button>
+                        <ng-container matColumnDef="may">
+                            <th mat-header-cell *matHeaderCellDef>
+                                May
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.may === 1">
+                                    <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'may')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.may === 2">
+                                    <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'may')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.may === 3">
+                                <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.may === 4">
+                                <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                            </ng-container>
+                            </td>
                         </ng-container>
-                        <ng-container *ngIf="element.march === 2">
-                            <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'march')"></button>
-                        </ng-container>
-                        <ng-container *ngIf="element.march === 3">
-                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
-                        </ng-container>
-                        </td>
-                    </ng-container>
 
-                    <ng-container matColumnDef="april">
-                        <th mat-header-cell *matHeaderCellDef>
-                            Apr
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.april === 1">
-                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'april')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.april === 2">
-                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'april')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.april === 3">
-                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        <ng-container matColumnDef="june">
+                            <th mat-header-cell *matHeaderCellDef>
+                                June
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.june === 1">
+                                    <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'june')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.june === 2">
+                                    <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'june')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.june === 3">
+                                    <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.june === 4">
+                                    <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                                </ng-container>
+                            </td>
                         </ng-container>
-                        </td>
-                    </ng-container>
 
-                    <ng-container matColumnDef="may">
-                        <th mat-header-cell *matHeaderCellDef>
-                            May
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.may === 1">
-                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'may')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.may === 2">
-                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'may')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.may === 3">
-                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        <ng-container matColumnDef="july">
+                            <th mat-header-cell *matHeaderCellDef>
+                                July
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.july === 1">
+                                    <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'july')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.july === 2">
+                                    <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'july')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.july === 3">
+                                    <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.july === 4">
+                                    <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                                </ng-container>
+                            </td>
                         </ng-container>
-                        </td>
-                    </ng-container>
 
-                    <ng-container matColumnDef="june">
-                        <th mat-header-cell *matHeaderCellDef>
-                            June
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.june === 1">
-                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'june')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.june === 2">
-                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'june')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.june === 3">
-                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        <ng-container matColumnDef="august">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Aug
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.august === 1">
+                                    <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'august')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.august === 2">
+                                    <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'august')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.august === 3">
+                                    <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.august === 4">
+                                    <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                                </ng-container>
+                            </td>
                         </ng-container>
-                        </td>
-                    </ng-container>
 
-                    <ng-container matColumnDef="july">
-                        <th mat-header-cell *matHeaderCellDef>
-                            July
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.july === 1">
-                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'july')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.july === 2">
-                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'july')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.july === 3">
-                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        <ng-container matColumnDef="september">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Sept
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.september === 1">
+                                    <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'september')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.september === 2">
+                                    <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'september')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.september === 3">
+                                    <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.september === 4">
+                                    <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                                </ng-container>
+                            </td>
                         </ng-container>
-                        </td>
-                    </ng-container>
 
-                    <ng-container matColumnDef="august">
-                        <th mat-header-cell *matHeaderCellDef>
-                            Aug
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.august === 1">
-                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'august')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.august === 2">
-                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'august')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.august === 3">
-                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        <ng-container matColumnDef="october">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Oct
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.october === 1">
+                                    <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'october')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.october === 2">
+                                    <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'october')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.october === 3">
+                                    <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.october === 4">
+                                    <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                                </ng-container>
+                            </td>
                         </ng-container>
-                        </td>
-                    </ng-container>
 
-                    <ng-container matColumnDef="september">
-                        <th mat-header-cell *matHeaderCellDef>
-                            Sept
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.september === 1">
-                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'september')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.september === 2">
-                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'september')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.september === 3">
-                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        <ng-container matColumnDef="november">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Nov
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.november === 1">
+                                    <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'november')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.november === 2">
+                                    <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'november')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.november === 3">
+                                    <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.november === 4">
+                                    <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                                </ng-container>
+                            </td>
                         </ng-container>
-                        </td>
-                    </ng-container>
 
-                    <ng-container matColumnDef="october">
-                        <th mat-header-cell *matHeaderCellDef>
-                            Oct
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.october === 1">
-                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'october')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.october === 2">
-                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'october')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.october === 3">
-                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        <ng-container matColumnDef="december">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Dec
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <ng-container *ngIf="element.december === 1">
+                                    <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'december')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.december === 2">
+                                    <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'december')"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.december === 3">
+                                    <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                                </ng-container>
+                                <ng-container *ngIf="element.december === 4">
+                                    <button class="button-38" role="button" style="background-color: #f3e7a8;" (click)= "showAlert('info', 'The Aprroval request has been already sent to the Owner.')"></button>
+                                </ng-container>
+                            </td>
                         </ng-container>
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="november">
-                        <th mat-header-cell *matHeaderCellDef>
-                            Nov
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.november === 1">
-                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'november')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.november === 2">
-                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'november')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.november === 3">
-                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
+                        <ng-container matColumnDef="Comments">
+                          <th mat-header-cell *matHeaderCellDef> Feedback </th>
+                          <td mat-cell *matCellDef="let element"> {{element.Comments}} </td>
                         </ng-container>
-                        </td>
-                    </ng-container>
+                        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" style="z-index: 1;"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-                    <ng-container matColumnDef="december">
-                        <th mat-header-cell *matHeaderCellDef>
-                            Dec
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.december === 1">
-                                <button class="button-38" role="button" style="background-color: #7be58b;" (click)="completedSucess(element, 'december')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.december === 2">
-                                <button class="button-38" role="button" style="background-color: #a8b6f3;" (click)="complete(element, 'december')"></button>
-                            </ng-container>
-                            <ng-container *ngIf="element.december === 3">
-                            <button class="button-38" role="button" style="background-color: #ff9b9b;"></button>
-                        </ng-container>
-                        </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Comments">
-                      <th mat-header-cell *matHeaderCellDef> Feedback </th>
-                      <td mat-cell *matCellDef="let element"> {{element.Comments}} </td>
-                    </ng-container>
-                    
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" style="z-index: 1;"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                </table>
+                    </table>
+                </div>
+                <!-- <mat-paginator [length]="200" [pageSizeOptions]="[7]" aria-label="Select page">
+                </mat-paginator> -->
+                
             </div>
-            <!-- <mat-paginator [length]="200" [pageSizeOptions]="[7]" aria-label="Select page">
-            </mat-paginator> -->
-            
         </div>
     </div>
 </div>

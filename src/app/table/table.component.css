@@ -65,7 +65,7 @@ table {
 th, td {
   border-bottom: 1px  solid black;
   text-align: left;
-  padding: 8px;
+  padding: 5px;
 }
 
 th {
@@ -122,4 +122,11 @@ td{
 
 .button-38:focus-visible {
   box-shadow: none;
+}
+
+.important-task {
+  font-weight: bold;
+  background: linear-gradient(135deg, #013a8f, #0066ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

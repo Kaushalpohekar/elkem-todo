@@ -5,17 +5,17 @@ import { UserserviceService } from '../userservice.service';
 import { AlertMsgComponent } from '../alert-msg/alert-msg.component';
 
 @Component({
-  selector: 'app-complete-approval',
-  templateUrl: './complete-approval.component.html',
-  styleUrls: ['./complete-approval.component.css']
+  selector: 'app-approval-request-sub-task',
+  templateUrl: './approval-request-sub-task.component.html',
+  styleUrls: ['./approval-request-sub-task.component.css']
 })
-export class CompleteApprovalComponent {
+export class ApprovalRequestSubTaskComponent {
   task: any;
   month: any;
   file: File | null = null;
   constructor(
     public service: UserserviceService,
-    public dialogRef: MatDialogRef<CompleteApprovalComponent>,
+    public dialogRef: MatDialogRef<ApprovalRequestSubTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog: MatDialog
   ) {
@@ -46,8 +46,8 @@ export class CompleteApprovalComponent {
       const base64String = this.file ? await this.convertFileToBase64(this.file) : '';
 
       const data = {
-        Task: this.task.name,
-        Frequency: this.task.frequency,
+        Task: this.task.name || this.task.Schedule_Equipment,
+        Frequency: this.task.frequency || this.task.Frequency,
         Month: this.month,
         Responsibility: this.task.Responsibility,
         Email: this.task.Email,
@@ -57,7 +57,7 @@ export class CompleteApprovalComponent {
         upload: base64String,
       }
 
-      this.service.approvalRequest(data).subscribe(
+      this.service.approvalRequestforSubTask(data).subscribe(
         (data)=> {
           this.dialogRef.close();
           this.showAlert('success', data.message);

@@ -25,6 +25,9 @@ import { SucessDailogComponent } from './sucess-dailog/sucess-dailog.component';
 import { CompleteApprovalComponent } from './complete-approval/complete-approval.component';
 
 import { PathLocationStrategy ,LocationStrategy } from '@angular/common';
+import { AlertMsgComponent } from './alert-msg/alert-msg.component';
+import { ApprovalRequestSubTaskComponent } from './approval-request-sub-task/approval-request-sub-task.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { PathLocationStrategy ,LocationStrategy } from '@angular/common';
     TableComponent,
     TimeBasedComponent,
     SucessDailogComponent,
-    CompleteApprovalComponent
+    CompleteApprovalComponent,
+    AlertMsgComponent,
+    ApprovalRequestSubTaskComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

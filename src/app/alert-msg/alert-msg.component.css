@@ -1,0 +1,116 @@
+/* styles */
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 500px;
+}
+
+.bold-title{
+    zoom: 1.2;
+    font-weight: 550;
+}
+
+.message {
+    width: calc(100% - 50px);
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    animation-name: slideIn;
+    animation-duration: 0.5s;
+    position: relative;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation-fill-mode: forwards;
+}
+
+.success-message {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.error-message {
+    background-color: #FF5733;
+    color: white;
+}
+
+.warning-message {
+    background-color: #FFC300;
+    color: white;
+}
+
+.info-message {
+    background-color: #3498DB;
+    color: white;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message p {
+    margin: 0;
+    padding-top: 10px;
+}
+
+.message-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.message-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke-width: 3;
+    stroke-dasharray: 158;
+    stroke-dashoffset: 158;
+    animation: fillAnimation 1s ease forwards;
+}
+
+.success-icon svg {
+    stroke: #4CAF50;
+}
+
+.error-icon svg {
+    stroke: #FF5733;
+}
+
+.warning-icon svg {
+    stroke: #FFC300;
+}
+
+.info-icon svg {
+    stroke: #3498DB;
+}
+
+@keyframes fillAnimation {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+

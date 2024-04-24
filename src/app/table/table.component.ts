@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { SucessDailogComponent } from '../sucess-dailog/sucess-dailog.component';
 import { CompleteApprovalComponent } from '../complete-approval/complete-approval.component';
+import { AlertMsgComponent } from '../alert-msg/alert-msg.component';
 
 export interface PeriodicElement {
   Sr_No: any;
@@ -25,6 +26,9 @@ export interface PeriodicElement {
   Nov: any;
   Dec: any;
   Comments: any;
+  Email: any;
+  mob: any;
+  admin_email : any;
 }
 
 @Component({
@@ -52,7 +56,7 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.getuserdata();
-    this.getalltask();
+    this.service.isPageLoading(true);
   }
 
   getuserdata() {
@@ -60,7 +64,7 @@ export class TableComponent implements OnInit {
       (data: any) => {
         console.log('API Response:', data);
         let counter = 1;
-        this.dataSource.data = data.devices.map((item: any, index: number) => ({
+        this.dataSource.data = data.Task.map((item: any, index: number) => ({
           position: counter++,
           name: item.Schedule_Equipment,
           Owner: item.admin_name || '',
@@ -78,8 +82,12 @@ export class TableComponent implements OnInit {
           october: item.Oct,
           november: item.Nov,
           december: item.December,
-          Comments: item.Comments
+          Comments: item.Comments,
+          Email : item.Email,
+          Mob : item.Mob,
+          admin_email : item.admin_email,
         }));
+        this.getalltask();
         // if (this.paginator) {
         //   this.dataSource.paginator = this.paginator; // Assign the paginator
         // }
@@ -98,6 +106,7 @@ export class TableComponent implements OnInit {
         this.overdueTasks = data.overdueTasks;
         this.inProgressTasks = data.inProgressTasks;
         this.completedTasks = data.completedTasks;
+        this.service.isPageLoading(false);
       },
       (error: any) => {
         console.error('Error fetching data:', error);
@@ -105,37 +114,16 @@ export class TableComponent implements OnInit {
     );
   }
 
-  getTaskStatus(element: any, month: string) {
-    const status = element[month];
-    let color = '';
-    switch (status) {
-      case 0: // Not submitted
-        color = '#DE7D70';
-        break;
-      case 1: // Completed
-        color = '#54A954';
-        break;
-      case 2: // Pending
-        color = '#7982E0';
-        break;
-      case null: // Null value
-        color = 'white';
-        break;
-      default:
-        color = 'white';
-    }
-    return {
-      'background-color': color,
-      width: '30px',
-      height: '20px'
-    };
-  }
 
   complete(task: any, month: string) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = { task, month };
     const dialogRef = this.dialog.open(CompleteApprovalComponent, dialogConfig);
-}
+    dialogRef.afterClosed().subscribe(sucess => {
+      this.getuserdata();
+      this.getalltask();
+    });
+  }
 
 
   completedSucess(task: any, month: string) {
@@ -146,5 +134,15 @@ export class TableComponent implements OnInit {
     setTimeout(() => {
       dialogRef.close();
     }, 2000);
+  }
+
+  showAlert(type: string, message: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { type, message };
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(AlertMsgComponent, dialogConfig);
+    setTimeout(() => {
+      dialogRef.close();
+    }, 3000);
   }
 }
