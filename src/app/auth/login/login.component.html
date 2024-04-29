@@ -1,0 +1,45 @@
+<div class="container-fluid login">
+    <div class="row">
+        <div class="col-12 mb-2">
+            <mat-card class="login-card">
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <div class="login-title text-center">Elkem To Do - Login</div>
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-center align-items-center border-custom">
+                            <img src="../../../assets/img/elkemHead.png" alt="Login Image" class="login-image">
+                        </div>
+                        <div class="col-lg-6">
+                            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                                <div class="row">
+                                    <div class="col-12 mb-2">
+										<mat-form-field appearance="outline" class="full-width">
+										    <mat-label>Email</mat-label>
+										    <input matInput formControlName="email" placeholder="Email" type="text">
+										    <mat-error *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+										        Please enter a valid email
+										    </mat-error>
+										</mat-form-field>
+                                    </div>
+                                    <div class="col-12 mb-2">
+										<mat-form-field appearance="outline" class="full-width">
+										    <mat-label>Password</mat-label>
+										    <input matInput formControlName="password" placeholder="Password" type="password">
+										    <mat-error *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+										        Password is required
+										    </mat-error>
+										</mat-form-field>
+                                    </div>
+                                    <div class="col-12 mb-2">
+                                        <button mat-raised-button color="primary" class="full-width" type="submit" [disabled]="loginForm.invalid">Login</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

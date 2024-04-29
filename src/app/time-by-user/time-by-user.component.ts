@@ -5,13 +5,14 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { SucessDailogComponent } from '../sucess-dailog/sucess-dailog.component';
 import { ApprovalRequestSubTaskComponent } from '../approval-request-sub-task/approval-request-sub-task.component';
 import { AlertMsgComponent } from '../alert-msg/alert-msg.component';
+import { AuthService } from '../auth/auth.service'
 
 @Component({
-  selector: 'app-time-based',
-  templateUrl: './time-based.component.html',
-  styleUrls: ['./time-based.component.css']
+  selector: 'app-time-by-user',
+  templateUrl: './time-by-user.component.html',
+  styleUrls: ['./time-by-user.component.css']
 })
-export class TimeBasedComponent implements OnInit {
+export class TimeByUserComponent implements OnInit {
   panelOpenState = false;
   displayedColumns: string[] = [
     'position',
@@ -35,12 +36,14 @@ export class TimeBasedComponent implements OnInit {
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   MainTask!: any[];
+  Email!: any;
 
-  constructor(public dialog: MatDialog,public service: UserserviceService) {}
+  constructor(private authService: AuthService, public dialog: MatDialog,public service: UserserviceService) {}
 
   ngOnInit() {
-    this.getMainTask();
     this.service.isPageLoading(true);
+    this.Email = this.authService.getUserMail();
+    this.getMainTask();
   }
 
   complete(task: any, month: string) {
@@ -74,32 +77,39 @@ export class TimeBasedComponent implements OnInit {
   }
 
   getMainTask() {
-    this.service.getTimeBasedMainTask().subscribe(
+    if(this.Email){
+      this.service.AllMainTaskByUser(this.Email).subscribe(
       (mainTask) => {
-        this.MainTask = mainTask.MainTask;
+        this.MainTask = mainTask.Task;
         this.getSubTask();
       },
       (error) => {
         this.showAlert('error', error.error.message);
       }
     );
+    }
   }
 
   getSubTask() {
-    this.service.getTimeBasedSubTask().subscribe(
-      (subTask) => {
-        const SubTask = subTask.SubTask;
-        this.MainTask.forEach((task) => {
-          task.subTasks = SubTask.filter((sub:any) => sub.Task_id === task.Task_id);
-        });
-        this.dataSource = new MatTableDataSource<PeriodicElement>(this.MainTask);
-        this.service.isPageLoading(false);
-      },
-      (error) => {
-        this.showAlert('error', error.error.message);
+    if (this.MainTask && this.MainTask.length > 0) {
+      if (this.Email) {
+        this.service.AllSubTaskByUser(this.Email).subscribe(
+          (subTask) => {
+            const SubTask = subTask.Task;
+            this.MainTask.forEach((task) => {
+              task.subTasks = SubTask.filter((sub: any) => sub.Task_id === task.Task_id);
+            });
+            this.dataSource = new MatTableDataSource<PeriodicElement>(this.MainTask);
+            this.service.isPageLoading(false);
+          },
+          (error) => {
+            this.showAlert('error', error.error.message);
+          }
+        ); 
       }
-    );
+    }
   }
+
 
   getSerial(index: number): string {
       const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';

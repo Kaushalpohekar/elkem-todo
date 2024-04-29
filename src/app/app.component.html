@@ -1,25 +1,35 @@
- <mat-toolbar class="navbar">
+ <mat-toolbar class="navbar" *ngIf="isLoggedIn()">
   <div class="left-side">
       <img src="../../../assets/img/elkem-logo-red.svg" alt="Logo" class="logo"/>
-    <!-- <span class="logo-text">SenseLive - TMS</span> -->
   </div>
-
-<!--   <div class="menu-icon" (click)="dashService.toggleMenu()">
-  	<button mat-mini-fab color="basic" aria-label="menu">
-    	<mat-icon>menu</mat-icon>
-	</button>
-  </div>
- -->
   <div class="right-side">
-    <button mat-mini-fab color="basic" (click)="CriticalProcess()">
+    <button mat-mini-fab color="basic" (click)="CriticalProcess()" *ngIf="getUserType() === 'Owner'">
       <mat-icon>list</mat-icon>
     </button>
 
-    <button mat-mini-fab color="basic" (click)="TimeBased()" >
+    <button mat-mini-fab color="basic" (click)="TimeBased()" *ngIf="getUserType() === 'Owner'">
       <mat-icon>table_chart</mat-icon>
+    </button>
+
+    <button mat-mini-fab color="basic" (click)="CriticalProcessByUser()" *ngIf="getUserType() === 'Responsibility'">
+      <mat-icon>list</mat-icon>
+    </button>
+
+    <button mat-mini-fab color="basic" (click)="TimeBasedByUser()" *ngIf="getUserType() === 'Responsibility'">
+      <mat-icon>table_chart</mat-icon>
+    </button>
+
+    <button mat-mini-fab color="basic" (click)="Approval()" *ngIf="getUserType() === 'Owner'">
+      <mat-icon>notifications</mat-icon>
+    </button>
+
+    <button mat-mini-fab color="basic" (click)="Logout()" >
+      <mat-icon>logout</mat-icon>
     </button>
   </div>
 </mat-toolbar>
+
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 
 <router-outlet></router-outlet>
 

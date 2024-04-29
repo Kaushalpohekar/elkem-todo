@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { SucessDailogComponent } from '../sucess-dailog/sucess-dailog.component';
 import { CompleteApprovalComponent } from '../complete-approval/complete-approval.component';
 import { AlertMsgComponent } from '../alert-msg/alert-msg.component';
+import { AuthService } from '../auth/auth.service'
 
 export interface PeriodicElement {
   Sr_No: any;
@@ -32,13 +33,15 @@ export interface PeriodicElement {
 }
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  selector: 'app-table-by-user',
+  templateUrl: './table-by-user.component.html',
+  styleUrls: ['./table-by-user.component.css']
 })
-export class TableComponent implements OnInit {
+export class TableByUserComponent implements OnInit {
 
-  constructor(public dialog: MatDialog,public service: UserserviceService) {}
+  Email!: any;
+
+  constructor(private authService: AuthService, public dialog: MatDialog,public service: UserserviceService) {}
 
   totalTasks: number = 0;
   overdueTasks: number = 0;
@@ -55,58 +58,64 @@ export class TableComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.getuserdata();
     this.service.isPageLoading(true);
+    this.Email = this.authService.getUserMail();
+    this.getuserdata();
   }
 
   getuserdata() {
-    this.service.getALlUserdata().subscribe(
-      (data: any) => {
-        let counter = 1;
-        this.dataSource.data = data.Task.map((item: any, index: number) => ({
-          position: counter++,
-          name: item.Schedule_Equipment,
-          Owner: item.admin_name || '',
-          frequency: item.Frequency,
-          Responsibility: item.Responsibility,
-          january: item.Jan,
-          february: item.Feb,
-          march: item.Mar,
-          april: item.Apr,
-          may: item.May,
-          june: item.Jun,
-          july: item.Jul,
-          august: item.Aug,
-          september: item.Sep,
-          october: item.Oct,
-          november: item.Nov,
-          december: item.December,
-          Comments: item.Comments,
-          Email : item.Email,
-          Mob : item.Mob,
-          admin_email : item.admin_email,
-        }));
-        this.getalltask();
-      },
-      (error: any) => {
-        this.showAlert('error', error.error.message);
-      }
-    );
+    if(this.Email){
+      this.service.AllScheduleByUser(this.Email).subscribe(
+        (data: any) => {
+          let counter = 1;
+          this.dataSource.data = data.Task.map((item: any, index: number) => ({
+            position: counter++,
+            name: item.Schedule_Equipment,
+            Owner: item.admin_name || '',
+            frequency: item.Frequency,
+            Responsibility: item.Responsibility,
+            january: item.Jan,
+            february: item.Feb,
+            march: item.Mar,
+            april: item.Apr,
+            may: item.May,
+            june: item.Jun,
+            july: item.Jul,
+            august: item.Aug,
+            september: item.Sep,
+            october: item.Oct,
+            november: item.Nov,
+            december: item.December,
+            Comments: item.Comments,
+            Email : item.Email,
+            Mob : item.Mob,
+            admin_email : item.admin_email,
+          }));
+          this.getalltask();
+        },
+        (error: any) => {
+          this.showAlert('error', error.error.message);
+        }
+      );
+    }
+    
   }
 
   getalltask() {
-    this.service.getALltask().subscribe(
-      (data: any) => {
-        this.totalTasks = data.totalTasks;
-        this.overdueTasks = data.overdueTasks;
-        this.inProgressTasks = data.inProgressTasks;
-        this.completedTasks = data.completedTasks;
-        this.service.isPageLoading(false);
-      },
-      (error: any) => {
-        this.showAlert('error', error.error.message);
-      }
-    );
+    if(this.Email){
+      this.service.countTasksByUser(this.Email).subscribe(
+        (data: any) => {
+          this.totalTasks = data.totalTasks;
+          this.overdueTasks = data.overdueTasks;
+          this.inProgressTasks = data.inProgressTasks;
+          this.completedTasks = data.completedTasks;
+          this.service.isPageLoading(false);
+        },
+        (error: any) => {
+          this.showAlert('error', error.error.message);
+        }
+      ); 
+    } 
   }
 
 

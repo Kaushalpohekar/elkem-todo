@@ -20,7 +20,6 @@ export class ApprovalRequestSubTaskComponent {
     private dialog: MatDialog
   ) {
     this.task = data.task;
-    console.log(this.task)
     this.month = data.month;
   }
 
@@ -65,7 +64,6 @@ export class ApprovalRequestSubTaskComponent {
         (error)=>{
           this.showAlert('error', error.error.message);
       });
-      console.log(data);
     } else {
       this.remark.markAsTouched();
     }

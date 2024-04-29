@@ -43,5 +43,33 @@ export class UserserviceService {
   approvalRequestforSubTask(data: any): Observable<any> {
     return this.http.post<any>(`${this.API_URL}/approvalRequestForSubTask`, data);
   }
+
+  AllApprovalRequestByOwner(admin_email: any): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/AllApprovalRequestByOwner/${admin_email}`);
+  }
+
+  markAsApproved(data: any): Observable<any> {
+    return this.http.post<any>(`${this.API_URL}/markAsApproved`, data);
+  }
+
+  markAsUnApproved(data: any): Observable<any> {
+    return this.http.post<any>(`${this.API_URL}/markAsUnApproved`, data);
+  }
+
+  AllScheduleByUser(Email: any): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/AllScheduleByUser/${Email}`);
+  }
+  
+  AllMainTaskByUser(Email: any): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/AllMainTaskByUser/${Email}`);
+  }
+  
+  AllSubTaskByUser(Email: any): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/AllSubTaskByUser/${Email}`);
+  }
+  
+  countTasksByUser(Email: any): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/countTasksByUser/${Email}`);
+  }
 }
 

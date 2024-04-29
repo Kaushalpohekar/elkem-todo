@@ -1,0 +1,13 @@
+.content{
+  padding-top: 13vh;
+  padding-bottom: 5vh;
+}
+
+.title{
+  font-size: 1.2rem;
+  font-weight: 550;
+}
+
+.Month{
+  text-transform: capitalize;
+}
