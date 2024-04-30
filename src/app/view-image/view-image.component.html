@@ -1,0 +1,5 @@
+<!-- view-image.component.html -->
+<div class="image-container">
+  <img [src]="data.upload || '../../assets/img/404.png' " alt="Delivery Note Image" class="img-display">
+  <button mat-mini-fab (click)="closeDialog()" class="close-button"><mat-icon>close</mat-icon></button>
+</div>

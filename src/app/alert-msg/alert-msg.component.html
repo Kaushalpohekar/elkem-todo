@@ -1,0 +1,13 @@
+<ng-container *ngIf="type === 'success' || type === 'error' || type === 'warning' || type === 'info'">
+  <div class="message {{ type }}-message">
+    <div class="message-icon {{ type }}-icon">
+      <svg viewBox="0 0 24 24">
+        <path *ngIf="type === 'success'" d="M20.5 5.9L9 17.4l-5.5-5.5" />
+        <path *ngIf="type === 'error'" d="M6.5 6.5l11 11m0-11l-11 11" />
+        <path *ngIf="type === 'warning'" d="M6.702 20.903a.996.996 0 0 1-.701-.291l-5.5-5.5a1 1 0 0 1 1.407-1.413l4.799 4.8l4.793-4.793a1 1 0 0 1 1.414 1.414l-5.5 5.5a.993.993 0 0 1-.712.293z"/>
+        <path *ngIf="type === 'info'" d="M12 1.5c-6.21 0-11.25 5.04-11.25 11.25s5.04 11.25 11.25 11.25s11.25-5.04 11.25-11.25S18.21 1.5 12 1.5zm0 19.5c-5.79 0-10.5-4.71-10.5-10.5S6.21 0 12 0s10.5 4.71 10.5 10.5s-4.71 10.5-10.5 10.5zM11.25 7.5h1.5v6h-1.5zM12 16.5a1.125 1.125 0 1 0 0-2.25a1.125 1.125 0 0 0 0 2.25z"/>
+      </svg>
+    </div>
+    <p class="bold-title">{{ message }}</p>
+  </div>
+</ng-container>

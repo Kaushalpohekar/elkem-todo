@@ -1,19 +1,109 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserserviceService } from '../userservice.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SucessDailogComponent } from '../sucess-dailog/sucess-dailog.component';
+import { ApprovalRequestSubTaskComponent } from '../approval-request-sub-task/approval-request-sub-task.component';
+import { AlertMsgComponent } from '../alert-msg/alert-msg.component';
 
 @Component({
   selector: 'app-time-based',
   templateUrl: './time-based.component.html',
   styleUrls: ['./time-based.component.css']
 })
-
-export class TimeBasedComponent {
+export class TimeBasedComponent implements OnInit {
   panelOpenState = false;
-  displayedColumns: string[] = ['position', 'name', 'Responsibility', 'frequency', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', 'Comments'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  displayedColumns: string[] = [
+    'position',
+    'name',
+    'Responsibility',
+    'frequency',
+    'january',
+    'february',
+    'march',
+    'april',
+    'may',
+    'june',
+    'july',
+    'august',
+    'september',
+    'october',
+    'november',
+    'december',
+    'Comments'
+  ];
+  dataSource = new MatTableDataSource<PeriodicElement>();
 
-  complete(element: any) {
-    console.log("open Dailog Box for sending the Mail", element);
+  MainTask!: any[];
+
+  constructor(public dialog: MatDialog,public service: UserserviceService) {}
+
+  ngOnInit() {
+    this.getMainTask();
+    this.service.isPageLoading(true);
+  }
+
+  complete(task: any, month: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { task, month };
+    const dialogRef = this.dialog.open(ApprovalRequestSubTaskComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(sucess => {
+      this.getMainTask();
+    });
+  }
+
+
+  completedSucess(task: any, month: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { task, month };
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(SucessDailogComponent, dialogConfig);
+    setTimeout(() => {
+      dialogRef.close();
+    }, 2000);
+  }
+
+  showAlert(type: string, message: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { type, message };
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(AlertMsgComponent, dialogConfig);
+    setTimeout(() => {
+      dialogRef.close();
+    }, 3000);
+  }
+
+  getMainTask() {
+    this.service.getTimeBasedMainTask().subscribe(
+      (mainTask) => {
+        this.MainTask = mainTask.MainTask;
+        this.getSubTask();
+      },
+      (error) => {
+        this.showAlert('error', error.error.message);
+      }
+    );
+  }
+
+  getSubTask() {
+    this.service.getTimeBasedSubTask().subscribe(
+      (subTask) => {
+        const SubTask = subTask.SubTask;
+        this.MainTask.forEach((task) => {
+          task.subTasks = SubTask.filter((sub:any) => sub.Task_id === task.Task_id);
+        });
+        this.dataSource = new MatTableDataSource<PeriodicElement>(this.MainTask);
+        this.service.isPageLoading(false);
+      },
+      (error) => {
+        this.showAlert('error', error.error.message);
+      }
+    );
+  }
+
+  getSerial(index: number): string {
+      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      return alphabet[index % alphabet.length];
   }
 }
 
@@ -36,12 +126,3 @@ export interface PeriodicElement {
   Dec: any;
   Comments: any;
 }
-
-export const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    Sr_No: 1, Schedule_Equipment: 'FCE -A Cooling Tower fills & Nozzles ', Responsibility: 'Manoj Thakre', Frequency: 'Half Yearly', Jan: 1, Feb: 3, Mar: 2, Apr: 1, May: '', Jun: '', Jul: '', Aug: '', Sep: 2, Oct: '', Nov: '', Dec: '', Comments: 'Some comments for equipment 1'
-  },
-  {
-    Sr_No: 1, Schedule_Equipment: 'FCE-B Cooling Tower fills & Nozzles ', Responsibility: 'Manoj Thakre', Frequency: 'Half Yearly', Jan: 3, Feb: '', Mar: '', Apr: 1, May: '', Jun: '', Jul: '', Aug: '', Sep: '', Oct: 2, Nov: '', Dec: '', Comments: 'Some comments for equipment 1'
-  }
-];

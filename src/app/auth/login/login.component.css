@@ -1,0 +1,44 @@
+.login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Background color for the whole page */
+}
+
+.login-card {
+    width: 60vw;
+    background-color: #fff; /* Background color for the card */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for the card */
+}
+
+.login-title{
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: #eb3636;
+}
+
+.border-custom{
+	border: 1px solid #eb3636;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.login-image {
+    max-width: 100%;
+    height: auto;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+@media (max-width: 991px) {
+    .login-image {
+        display: none; /* Hide image on smaller screens */
+    }
+}
+
+
+.full-width{
+	width: 100%;
+}

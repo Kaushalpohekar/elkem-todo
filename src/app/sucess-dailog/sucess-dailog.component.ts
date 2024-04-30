@@ -16,6 +16,5 @@ export class SucessDailogComponent {
   ){
     this.task = data.task;
     this.month = data.month;
-    console.log(this.task);
   }
 }
