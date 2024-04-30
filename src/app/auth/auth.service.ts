@@ -60,29 +60,56 @@ export class AuthService {
   }
 
 
-  getUserDetails(): void {
-    const token = this.getToken();
-    if (token) {
-      const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-      this.http.get(`${this.API_URL}/user`, { headers }).pipe(
-        catchError(this.handleError)
-      ).subscribe(
-        (user: any) => {
-          const userType = user?.usertype;
-          const userId = user?.userid;
-          const personalemail = user?.personalemail;
-          if (userType && userId && personalemail) {
-            this.setUserType(userType);
-            this.setUserMail(personalemail);
-            sessionStorage.setItem('UserId', userId);
-          } else {
-            this.handleError("Invalid user data received");
-          }
-        },
-        error => this.handleError(error)
-      );
-    }
+  // getUserDetails(): void {
+  //   const token = this.getToken();
+  //   if (token) {
+  //     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+  //     this.http.get(`${this.API_URL}/user`, { headers }).pipe(
+  //       catchError(this.handleError)
+  //     ).subscribe(
+  //       (user: any) => {
+  //         const userType = user?.usertype;
+  //         const userId = user?.userid;
+  //         const personalemail = user?.personalemail;
+  //         if (userType && userId && personalemail) {
+  //           this.setUserType(userType);
+  //           this.setUserMail(personalemail);
+  //           sessionStorage.setItem('UserId', userId);
+  //         } else {
+  //           this.handleError("Invalid user data received");
+  //         }
+  //       },
+  //       error => this.handleError(error)
+  //     );
+  //   }
+  // }
+getUserDetails(): void {
+  const sessionToken = this.getToken(); // Assuming you have a function to retrieve the session token from cookies
+
+  if (sessionToken) {
+    const requestBody = { sessionToken: sessionToken }; // Assuming the backend expects the token in a field called sessionToken in the request body
+    this.http.post(`${this.API_URL}/user`, requestBody).pipe(
+      catchError(this.handleError)
+    ).subscribe(
+      (user: any) => {
+        const userType = user?.usertype;
+        const userId = user?.userid;
+        const personalemail = user?.personalemail;
+        
+        if (userType && userId && personalemail) {
+          this.setUserType(userType);
+          this.setUserMail(personalemail);
+          sessionStorage.setItem('UserId', userId);
+        } else {
+          this.handleError("Invalid user data received");
+        }
+      },
+      error => this.handleError(error)
+    );
   }
+}
+
+
 
   private handleError(error: any): Observable<never> {
     let errorMessage = 'An error occurred';
